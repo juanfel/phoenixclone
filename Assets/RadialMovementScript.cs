@@ -8,7 +8,7 @@ public class RadialMovementScript : MonoBehaviour {
     public float initial_distance;
     public float theta;
     public float radius = 4;
-    public float speed; //en angulos por segundo
+    public float speed; //en porciones de circulo por segundo
     float realSpeed; //en angulos por update
     public float linealSpeed; //En unidades por segundo
     float realLinealSpeed; //En unidades por update
@@ -27,7 +27,9 @@ public class RadialMovementScript : MonoBehaviour {
         //Con el producto punto se obtiene la direccion relativa del vector posicion
         //con respecto a 0
         theta *= Mathf.Sign(Vector3.Cross(Vector3.right, position).z);
-        realSpeed = Time.fixedDeltaTime * speed;
+        //Convierte las unidades entendibles por los humanos
+        //a las apropiadas para el computador
+        realSpeed = Time.fixedDeltaTime * (speed*MAX_ANGLE);
         realLinealSpeed = Time.fixedDeltaTime * linealSpeed;
     }
 
@@ -35,6 +37,7 @@ public class RadialMovementScript : MonoBehaviour {
     void Update()
     {
         transform.position = position;
+        transform.eulerAngles = new Vector3(0,0,theta*Mathf.Rad2Deg);
     }
    
     void FixedUpdate()

@@ -5,8 +5,8 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
     public RadialMovementScript radialMovement;
     bool startedMovement = true;
     bool startedReturn;
-    bool movingLeft = true;
-    bool timetoChangeDirection = true;
+    bool oscilating = false;
+    bool movingLeft = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -18,10 +18,10 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
         //Incluye el patron de retorno
         if (startedMovement)
         {
-            if (timetoChangeDirection)
+            if (!oscilating)
             {
-                Invoke("changeDirection", 1f); //Que cambie direccion cada 1 segundo
-                timetoChangeDirection = false;
+                InvokeRepeating("changeDirection", 1f, 0.5f);
+                oscilating = true;
             }
             if (movingLeft)
             {
@@ -40,6 +40,5 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
     {
         //Cambia la direccion del enemigo despues de un tiempo determinado
         movingLeft = !movingLeft; //Deberia cambiar de true a false y viceversa
-        timetoChangeDirection = true;
     }
 }
