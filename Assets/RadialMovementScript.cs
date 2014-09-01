@@ -19,14 +19,17 @@ public class RadialMovementScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        //Ajusta el sprite inicial al cilindro donde debe moverse
-        position = radius*transform.position.normalized;
-        position.z = initial_distance;
-        theta = Vector3.Angle(Vector3.right,position); //En grados
+        //Obtiene un angulo dado por la posicion inicial de la entidad
+        
+        theta = Vector3.Angle(Vector3.right,transform.position); //En grados
         theta = theta * Mathf.Deg2Rad;
+
         //Con el producto punto se obtiene la direccion relativa del vector posicion
         //con respecto a 0
-        theta *= Mathf.Sign(Vector3.Cross(Vector3.right, position).z);
+        theta *= Mathf.Sign(Vector3.Cross(Vector3.right, transform.position).z);
+
+        //Ajusta la entidad al cilindro
+        position = new Vector3(radius *1.5f* Mathf.Cos(theta), radius * Mathf.Sin(theta), initial_distance);
         //Convierte las unidades entendibles por los humanos
         //a las apropiadas para el computador
         realSpeed = Time.fixedDeltaTime * (speed*MAX_ANGLE);

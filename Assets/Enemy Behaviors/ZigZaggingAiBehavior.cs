@@ -31,6 +31,28 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
             }
             radialMovement.moveForward(-1f);
         }
+        else if (startedReturn)
+        {
+            //Aqui retrocede hasta llegar al inicio
+            if (transform.position.z >= 0 && transform.position.z < radialMovement.initial_distance)
+            {
+                radialMovement.moveForward();
+            }
+            else
+            {
+                startedReturn = false;
+                startedMovement = true;
+            }
+
+
+        }
+        if (transform.position.z <= 0)
+        {
+            //Comienza el patron para que la nave vuelva a su posicion inicial
+            startedMovement = false;
+            startedReturn = true;
+        }
+        
         
 	}
 
