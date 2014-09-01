@@ -7,9 +7,11 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
     bool startedReturn;
     bool oscilating = false;
     bool movingLeft = false;
+    float originalTheta;
+    public float movementAmplitude = 0.15f; //Amplitud del movimiento zigzageante en porciones de circulo
 	// Use this for initialization
 	void Start () {
-	
+        originalTheta = radialMovement.theta;
 	}
 	
 	// Update is called once per frame
@@ -18,11 +20,7 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
         //Incluye el patron de retorno
         if (startedMovement)
         {
-            if (!oscilating)
-            {
-                InvokeRepeating("changeDirection", 1f, 0.5f);
-                oscilating = true;
-            }
+            changeDirection();
             if (movingLeft)
             {
                 radialMovement.moveLeft();
@@ -38,7 +36,14 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
 
     void changeDirection()
     {
-        //Cambia la direccion del enemigo despues de un tiempo determinado
-        movingLeft = !movingLeft; //Deberia cambiar de true a false y viceversa
+        //Cambia la direccion del enemigo de acuerdo a la distancia angular
+        //recorrida
+        if (Mathf.Abs(originalTheta - radialMovement.theta) >=(movementAmplitude*(2*Mathf.PI)))
+        {
+            movingLeft = !movingLeft; //Deberia cambiar de true a false y viceversa
+            originalTheta = radialMovement.theta;
+        }
+        
+
     }
 }
