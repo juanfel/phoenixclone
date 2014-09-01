@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class FiringBehaviorScript : MonoBehaviour {
-
     GameObject disparo;
     string tipo_disparo = "Bala";
 	// Use this for initialization
@@ -14,7 +13,7 @@ public class FiringBehaviorScript : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(disparo, new Vector3(0, 0, 0), Quaternion.identity);
+            Instantiate(disparo, gameObject.transform.position, Quaternion.identity);
         }
 	}
     void shot()

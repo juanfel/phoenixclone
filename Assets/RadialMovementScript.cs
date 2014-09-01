@@ -15,7 +15,7 @@ public class RadialMovementScript : MonoBehaviour {
     public const float MAX_ANGLE = 2f*Mathf.PI;
     public const float MAX_SPEED = 5f;
     Quaternion angleQuat;
-    Vector3 position;
+    public Vector3 position;
     // Use this for initialization
     void Start()
     {
