@@ -3,15 +3,18 @@ using System.Collections;
 
 public class ZigZaggingAiBehavior : MonoBehaviour {
     public RadialMovementScript radialMovement;
+    public RadialMovementScript playerRadialMovement;
     bool startedMovement = true;
-    bool startedReturn;
+    bool startedReturn = false;
     bool oscilating = false;
     bool movingLeft = false;
-    float originalTheta;
+    float centerTheta; //Tiene el angulo en el cual el enemigo deberia oscilar
+    float originalTheta; //Tiene el angulo de regreso
     public float movementAmplitude = 0.15f; //Amplitud del movimiento zigzageante en porciones de circulo
 	// Use this for initialization
 	void Start () {
-        originalTheta = radialMovement.theta;
+        centerTheta = radialMovement.theta;
+        originalTheta = centerTheta;
 	}
 	
 	// Update is called once per frame
@@ -60,12 +63,25 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
     {
         //Cambia la direccion del enemigo de acuerdo a la distancia angular
         //recorrida
-        if (Mathf.Abs(originalTheta - radialMovement.theta) >=(movementAmplitude*(2*Mathf.PI)))
+        if (Mathf.Abs(centerTheta - radialMovement.theta) >=(movementAmplitude*(2*Mathf.PI)))
         {
             movingLeft = !movingLeft; //Deberia cambiar de true a false y viceversa
-            originalTheta = radialMovement.theta;
+            followPlayer(); //Queremos que siga al jugador solo despues de una oscilacion
         }
         
 
     }
+    void followPlayer()
+    {
+        //Trata de que girar en la misma direccion que el jugador
+        if (centerTheta - playerRadialMovement.theta > 0)
+        {
+            centerTheta += radialMovement.speed;
+        }
+        else if (centerTheta - playerRadialMovement.theta < 0)
+        {
+            centerTheta -= radialMovement.speed;
+        }
+    }
+
 }

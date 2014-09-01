@@ -26,8 +26,11 @@ public class RadialMovementScript : MonoBehaviour {
 
         //Con el producto punto se obtiene la direccion relativa del vector posicion
         //con respecto a 0
-        theta *= Mathf.Sign(Vector3.Cross(Vector3.right, transform.position).z);
-
+        float signo_theta = Mathf.Sign(Vector3.Cross(Vector3.right, transform.position).z);
+        if (signo_theta < 0)
+        {
+            theta = 2 * Mathf.PI - theta; //Si da un angulo negativo busca su equivalente positivo
+        }
         //Ajusta la entidad al cilindro
         position = new Vector3(radius *1.5f* Mathf.Cos(theta), radius * Mathf.Sin(theta), initial_distance);
         //Convierte las unidades entendibles por los humanos
@@ -62,6 +65,10 @@ public class RadialMovementScript : MonoBehaviour {
     public void moveSideways(float axis)
     {
         theta = (theta + Mathf.Sign(axis)*realSpeed) % MAX_ANGLE;
+        if (theta < 0)
+        {
+            theta = MAX_ANGLE + theta;
+        }
         position.x = radius* 1.5f * Mathf.Cos(theta);
         position.y = radius * Mathf.Sin(theta);
     }
