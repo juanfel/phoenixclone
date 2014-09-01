@@ -12,8 +12,8 @@ public class RadialMovementScript : MonoBehaviour {
     float realSpeed; //en angulos por update
     public float linealSpeed; //En unidades por segundo
     float realLinealSpeed; //En unidades por update
-    const float MAX_ANGLE = 2f*Mathf.PI;
-    const float MAX_SPEED = 5f;
+    public const float MAX_ANGLE = 2f*Mathf.PI;
+    public const float MAX_SPEED = 5f;
     Quaternion angleQuat;
     Vector3 position;
     // Use this for initialization
@@ -82,5 +82,25 @@ public class RadialMovementScript : MonoBehaviour {
     {
         //Alias para que actor avanze hacia la camara
         moveForward(1f);
+    }
+    public float getAngularSpeed()
+    {
+        //devuelve la velocidad angular real
+        return realSpeed;
+    }
+    public float getLinearSpeed()
+    {
+        //Devuelve la velocidad lineal real
+        return realLinealSpeed;
+    }
+    public static float getTrueAngle(float angle)
+    {
+        //Si es un angulo negativo da su complemento
+        if (angle < 0 || angle > MAX_ANGLE)
+        {
+            return Mathf.Abs(MAX_ANGLE - angle);
+        }
+        return angle;
+
     }
 }

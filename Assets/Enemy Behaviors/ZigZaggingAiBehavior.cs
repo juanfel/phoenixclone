@@ -4,11 +4,11 @@ using System.Collections;
 public class ZigZaggingAiBehavior : MonoBehaviour {
     public RadialMovementScript radialMovement;
     public RadialMovementScript playerRadialMovement;
+    bool startedGameplay = false;
     bool startedMovement = true;
     bool startedReturn = false;
-    bool oscilating = false;
     bool movingLeft = false;
-    float centerTheta; //Tiene el angulo en el cual el enemigo deberia oscilar
+    public float centerTheta; //Tiene el angulo en el cual el enemigo deberia oscilar
     float originalTheta; //Tiene el angulo de regreso
     public float movementAmplitude = 0.15f; //Amplitud del movimiento zigzageante en porciones de circulo
 	// Use this for initialization
@@ -21,7 +21,14 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
 	void Update () {
         //Se mueve en un patron zigzageante cuando se le ordena hacerlo
         //Incluye el patron de retorno
-        if (startedMovement)
+        if (!startedGameplay)
+        {
+            //Para asegurarse que se haya asignado un theta_0
+            centerTheta = radialMovement.theta;
+            originalTheta = centerTheta;
+            startedGameplay = true;
+        }
+        if (startedMovement && startedGameplay)
         {
             changeDirection();
             if (movingLeft)
@@ -63,10 +70,12 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
     {
         //Cambia la direccion del enemigo de acuerdo a la distancia angular
         //recorrida
-        if (Mathf.Abs(centerTheta - radialMovement.theta) >=(movementAmplitude*(2*Mathf.PI)))
+        float delta = centerTheta - radialMovement.theta;
+
+        if (Mathf.Abs(delta) >=(movementAmplitude*(2*Mathf.PI)))
         {
             movingLeft = !movingLeft; //Deberia cambiar de true a false y viceversa
-            followPlayer(); //Queremos que siga al jugador solo despues de una oscilacion
+            //followPlayer(); //Queremos que siga al jugador solo despues de una oscilacion
         }
         
 
@@ -76,12 +85,14 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
         //Trata de que girar en la misma direccion que el jugador
         if (centerTheta - playerRadialMovement.theta > 0)
         {
-            centerTheta += radialMovement.speed;
+            centerTheta += radialMovement.getAngularSpeed();
         }
         else if (centerTheta - playerRadialMovement.theta < 0)
         {
-            centerTheta -= radialMovement.speed;
+            centerTheta -= radialMovement.getAngularSpeed();
         }
+        centerTheta = RadialMovementScript.getTrueAngle(centerTheta);
+        
     }
 
 }
