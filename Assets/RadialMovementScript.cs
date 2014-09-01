@@ -95,7 +95,7 @@ public class RadialMovementScript : MonoBehaviour {
     }
     public static float getTrueAngle(float angle)
     {
-        //Si es un angulo negativo da su complemento
+        //Si es un angulo negativo o uno mas grande que el maximo da su complemento
         if (angle < 0 || angle > MAX_ANGLE)
         {
             return Mathf.Abs(MAX_ANGLE - angle);
