@@ -5,16 +5,17 @@ public class ForwardBulletMovementScript : MonoBehaviour {
     //Controla el movimiento de una bala y su comportamiento cuando
     //choca
     int direction = 1; //Indica el eje de movimiento (hacia adelante-hacia atras)
+    public int damage = 1;
     public GameObject owner;
     public RadialMovementScript bullet;
 	// Use this for initialization
 	void Start () {
-        bullet.position.z = 0;
+        bullet.position.z = owner.transform.position.z;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        bullet.moveForward();
+        bullet.moveForward(direction);
 	}
     void OnCollisionEnter(Collision coll)
     {
@@ -22,7 +23,7 @@ public class ForwardBulletMovementScript : MonoBehaviour {
         {
             Debug.Log("HIT! Owner:" + owner.tag);
             Debug.Log("coll:" + coll.gameObject.tag);
-            coll.gameObject.GetComponent<KillableBehavior>().RemoveHitpoint();
+            coll.gameObject.GetComponent<KillableBehavior>().RemoveHitpoint(damage);
         }
         
     }
