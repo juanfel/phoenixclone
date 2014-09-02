@@ -13,6 +13,7 @@ public class FiringBehaviorScript : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("Fire1"))
         {
+            disparo.GetComponent<ForwardBulletMovementScript>().owner = gameObject;
             Instantiate(disparo, gameObject.transform.position, Quaternion.identity);
         }
 	}
@@ -20,4 +21,5 @@ public class FiringBehaviorScript : MonoBehaviour {
     {
 
     }
+    
 }
