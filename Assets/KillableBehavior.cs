@@ -4,7 +4,7 @@ using System.Collections;
 public class KillableBehavior : MonoBehaviour {
     //Behavior para que naves tengan hitpoints y puedan morir
     public int hitpoints;
-    public bool ghostAfterHit = false;
+    public bool ghostAfterHit;
 	// Use this for initialization
 	void Start () {
 	
@@ -14,9 +14,9 @@ public class KillableBehavior : MonoBehaviour {
 	void Update () {
 	
 	}
-    void ReactivareCollider()
+    void ReactivateCollider()
     {
-        gameObject.collider.isTrigger = false;
+        gameObject.collider.enabled = true;
     }
     public void RemoveHitpoint(int damage)
     {
@@ -26,8 +26,8 @@ public class KillableBehavior : MonoBehaviour {
         //(solo si esta activado este tipo de comportamiento)
         if (ghostAfterHit)
         {
-            gameObject.collider.isTrigger = true;
-            Invoke("ReactivateCollider", 1f);
+            gameObject.collider.enabled = false;
+            Invoke("ReactivateCollider", 4f);
         }
         if (hitpoints <= 0)
         {

@@ -13,12 +13,17 @@ public class RammingBehavior : MonoBehaviour {
 	void Update () {
         
 	}
+    void ReactivateCollider()
+    {
+        gameObject.collider.enabled = true;
+    }
     void OnCollisionEnter(Collision coll)
     {
         if (coll.gameObject.tag == "Player")
         {
             Debug.Log("Embestida");
             coll.gameObject.GetComponent<KillableBehavior>().RemoveHitpoint(damage);
+            
         }
 
     }
