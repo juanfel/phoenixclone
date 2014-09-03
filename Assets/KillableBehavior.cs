@@ -39,6 +39,7 @@ public class KillableBehavior : MonoBehaviour {
     {
         //Mata a este gameObject y si es pertinente 
         //da el puntaje necesario al atacante
+        Debug.Log("attacker: " + attacker.tag);
         if (attacker.tag == "Player")
         {
             attacker.GetComponent<ScorableBehavior>().addScore(score);
