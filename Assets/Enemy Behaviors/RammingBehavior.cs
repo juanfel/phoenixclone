@@ -22,7 +22,7 @@ public class RammingBehavior : MonoBehaviour {
         if (coll.gameObject.tag == "Player")
         {
             Debug.Log("Embestida");
-            coll.gameObject.GetComponent<KillableBehavior>().RemoveHitpoint(damage);
+            coll.gameObject.GetComponent<KillableBehavior>().RemoveHitpoint(damage,coll.gameObject);
             
         }
 

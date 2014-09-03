@@ -23,7 +23,8 @@ public class ForwardBulletMovementScript : MonoBehaviour {
         {
             Debug.Log("HIT! Owner:" + owner.tag);
             Debug.Log("coll:" + coll.gameObject.tag);
-            coll.gameObject.GetComponent<KillableBehavior>().RemoveHitpoint(damage);
+            coll.gameObject.GetComponent<KillableBehavior>().RemoveHitpoint(damage,coll.gameObject);
+            
         }
         
     }

@@ -4,6 +4,7 @@ using System.Collections;
 public class KillableBehavior : MonoBehaviour {
     //Behavior para que naves tengan hitpoints y puedan morir
     public int hitpoints;
+    public int score;
     public bool ghostAfterHit;
 	// Use this for initialization
 	void Start () {
@@ -18,7 +19,7 @@ public class KillableBehavior : MonoBehaviour {
     {
         gameObject.collider.enabled = true;
     }
-    public void RemoveHitpoint(int damage)
+    public void RemoveHitpoint(int damage, GameObject attacker)
     {
         hitpoints -= damage;
         //Queremos que lo que sea que haga daño lo haga una sola vez
@@ -31,12 +32,17 @@ public class KillableBehavior : MonoBehaviour {
         }
         if (hitpoints <= 0)
         {
-            KillMe();
+            KillMe(attacker);
         }
     }
-    void KillMe()
+    void KillMe(GameObject attacker)
     {
-        //Mata a este gameObject
+        //Mata a este gameObject y si es pertinente 
+        //da el puntaje necesario al atacante
+        if (attacker.tag == "Player")
+        {
+            attacker.GetComponent<ScorableBehavior>().addScore(score);
+        }
         Destroy(gameObject);
     }
 }
