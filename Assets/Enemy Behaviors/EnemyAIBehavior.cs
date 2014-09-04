@@ -12,5 +12,8 @@ public class EnemyAIBehavior : MonoBehaviour {
     {
 
     }
-
+    public virtual void SetTarget(GameObject target)
+    {
+        this.target = target;
+    }
 }

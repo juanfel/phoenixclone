@@ -16,6 +16,8 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
 	void Start () {
         centerTheta = radialMovement.theta;
         originalTheta = centerTheta;
+        target = null;
+            
 	}
 	
 	// Update is called once per frame
@@ -27,7 +29,6 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
             //Para asegurarse que se haya asignado un theta_0
             centerTheta = radialMovement.theta;
             originalTheta = centerTheta;
-            playerRadialMovement = target.GetComponent<RadialMovementScript>();
             startedGameplay = true;
         }
         if (transform.position.z <= 0)
@@ -68,6 +69,11 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
         
         
 	}
+    public override void SetTarget(GameObject target)
+    {
+        base.SetTarget(target);
+        playerRadialMovement = target.GetComponent<RadialMovementScript>();
+    }
     //Se encargan de que el enemigo empieze a moverse de acuerdo a este comportamiento
     public override void StartMovement()
     {
