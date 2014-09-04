@@ -5,7 +5,7 @@ public class RadialMovementScript : MonoBehaviour {
 
     //Se encarga de dar las funciones de movimiento radial a las distintos
     //tipos de naves
-    public float initial_distance;
+    public float max_distance;
     public float theta;
     public float radius = 4;
     public float speed; //en porciones de circulo por segundo
@@ -20,8 +20,9 @@ public class RadialMovementScript : MonoBehaviour {
     void Start()
     {
         //Obtiene un angulo dado por la posicion inicial de la entidad
-        
-        theta = Vector3.Angle(Vector3.right,transform.position); //En grados
+        position = transform.position;
+        position.z = 0;
+        theta = Vector3.Angle(Vector3.right,position); //En grados
         theta = theta * Mathf.Deg2Rad;
 
         //Con el producto punto se obtiene la direccion relativa del vector posicion
@@ -32,7 +33,8 @@ public class RadialMovementScript : MonoBehaviour {
             theta = 2 * Mathf.PI - theta; //Si da un angulo negativo busca su equivalente positivo
         }
         //Ajusta la entidad al cilindro
-        position = new Vector3(radius *1.5f* Mathf.Cos(theta), radius * Mathf.Sin(theta), initial_distance);
+        position = new Vector3(radius *1.5f* Mathf.Cos(theta), radius * Mathf.Sin(theta), 
+            Mathf.Min(transform.position.z,max_distance));
         //Convierte las unidades entendibles por los humanos
         //a las apropiadas para el computador
         realSpeed = Time.fixedDeltaTime * (speed*MAX_ANGLE);
@@ -76,7 +78,7 @@ public class RadialMovementScript : MonoBehaviour {
     {
         //Acerca o aleja al actor de la camara
         position.z = (position.z + Mathf.Sign(axis) * realLinealSpeed);
-        position.z = Mathf.Clamp(position.z, 0, initial_distance);
+        position.z = Mathf.Clamp(position.z, 0, max_distance);
     }
     public void moveForward()
     {

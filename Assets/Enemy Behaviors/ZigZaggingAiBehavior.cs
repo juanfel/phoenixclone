@@ -44,7 +44,7 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
         else if (startedReturn)
         {
             //Aqui retrocede hasta llegar al inicio
-            if (transform.position.z >= 0 && transform.position.z < radialMovement.initial_distance)
+            if (transform.position.z >= 0 && transform.position.z < radialMovement.max_distance)
             {
                 radialMovement.moveForward();
             }
