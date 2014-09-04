@@ -3,12 +3,13 @@ using System.Collections;
 
 public class ZigZaggingAiBehavior : EnemyAIBehavior {
     public RadialMovementScript radialMovement;
-    public RadialMovementScript playerRadialMovement;
+    RadialMovementScript playerRadialMovement;
     bool startedGameplay = false;
     public bool startedMovement = false;
     public bool startedReturn = false;
     bool movingLeft = false;
     public float centerTheta; //Tiene el angulo en el cual el enemigo deberia oscilar
+    float oldTheta; //Para 
     float originalTheta; //Tiene el angulo de regreso
     public float movementAmplitude = 0.15f; //Amplitud del movimiento zigzageante en porciones de circulo
 	// Use this for initialization
@@ -26,6 +27,7 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
             //Para asegurarse que se haya asignado un theta_0
             centerTheta = radialMovement.theta;
             originalTheta = centerTheta;
+            playerRadialMovement = target.GetComponent<RadialMovementScript>();
             startedGameplay = true;
         }
         if (transform.position.z <= 0)
@@ -51,8 +53,8 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
             //Aqui retrocede hasta llegar al inicio
             if (transform.position.z >= 0 && transform.position.z < radialMovement.max_distance)
             {
-                followPlayer();
-                radialMovement.setAngle(centerTheta);
+            //    followPlayer();
+            //    radialMovement.setAngle(centerTheta);
                 radialMovement.moveForward();
             }
             else
@@ -85,7 +87,7 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
         if (Mathf.Abs(delta) >=(movementAmplitude*(2*Mathf.PI)))
         {
             movingLeft = !movingLeft; //Deberia cambiar de true a false y viceversa
-            //followPlayer(); //Queremos que siga al jugador solo despues de una oscilacion
+            followPlayer(); //Queremos que siga al jugador solo despues de una oscilacion completa
         }
         
 
@@ -93,15 +95,17 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
     void followPlayer()
     {
         
-        //Trata de que girar en la misma direccion que el jugador
-        if (centerTheta - playerRadialMovement.theta > 0)
+        //Trata de que girar en la misma direccion que el jugador, ademas
+        //pide que cambie de direccion solo si la oscilacion es en la misma
+        //direccion del player
+        if (centerTheta - playerRadialMovement.theta > 0 && movingLeft)
         {
-            centerTheta += radialMovement.getAngularSpeed();
+            centerTheta -= 2*radialMovement.getAngularSpeed();
             //radialMovement.moveLeft();
         }
-        else if (centerTheta - playerRadialMovement.theta < 0)
+        else if (centerTheta - playerRadialMovement.theta < 0 && !movingLeft)
         {
-            centerTheta -= radialMovement.getAngularSpeed();
+            centerTheta += 2*radialMovement.getAngularSpeed();
             //radialMovement.moveRight();
         }
         centerTheta = RadialMovementScript.getTrueAngle(centerTheta);
