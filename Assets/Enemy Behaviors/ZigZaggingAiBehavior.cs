@@ -33,7 +33,7 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
             //Comienza el patron para que la nave vuelva a su posicion inicial
             startedReturn = true;
         }
-        if (startedMovement && !startedReturn)
+        if (startedMovement && ! startedReturn)
         {
             changeDirection();
             if (movingLeft)
@@ -51,6 +51,8 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
             //Aqui retrocede hasta llegar al inicio
             if (transform.position.z >= 0 && transform.position.z < radialMovement.max_distance)
             {
+                followPlayer();
+                radialMovement.setAngle(centerTheta);
                 radialMovement.moveForward();
             }
             else
@@ -90,14 +92,17 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
     }
     void followPlayer()
     {
+        
         //Trata de que girar en la misma direccion que el jugador
         if (centerTheta - playerRadialMovement.theta > 0)
         {
             centerTheta += radialMovement.getAngularSpeed();
+            //radialMovement.moveLeft();
         }
         else if (centerTheta - playerRadialMovement.theta < 0)
         {
             centerTheta -= radialMovement.getAngularSpeed();
+            //radialMovement.moveRight();
         }
         centerTheta = RadialMovementScript.getTrueAngle(centerTheta);
         

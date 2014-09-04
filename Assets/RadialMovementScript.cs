@@ -99,11 +99,48 @@ public class RadialMovementScript : MonoBehaviour {
     public static float getTrueAngle(float angle)
     {
         //Si es un angulo negativo o uno mas grande que el maximo da su complemento
-        if (angle < 0 || angle > MAX_ANGLE)
+        if (angle < 0)
         {
-            return Mathf.Abs(MAX_ANGLE - angle);
+            return Mathf.Abs(MAX_ANGLE + angle);
+        }
+        else if (angle > MAX_ANGLE)
+        {
+            return Mathf.Abs(angle - MAX_ANGLE);
         }
         return angle;
 
+    }
+    public static float getAcuteAngleBetween(float angle1, float angle2)
+    {
+        //Saca el angulo mas chico entre angle1 y angle2, para ver mejor como acercarse
+        //al player, por ejemplo.
+        //Para esto ve si es menor la diferencia directa de 
+        float delta = Mathf.Abs(angle1 - angle2);
+        return Mathf.Min(MAX_ANGLE - delta, delta);
+
+    }
+    public static float getAcuteAngleBetween(Vector3 pos1, Vector3 pos2)
+    {
+        //Calcula el angulo entre 2 vectores, considerando que se descarta z en ambos
+        Vector3 newpos1 = pos1;
+        Vector3 newpos2 = pos2;
+        newpos1.z = 0;
+        newpos2.z = 0;
+
+        float angle = Vector3.AngleBetween(newpos1, newpos2);
+        angle *= Mathf.Sign(Vector3.Cross(newpos1, newpos2).z);
+        return angle;
+    }
+    
+    public void setAngle(float angle)
+    {
+        //Impone que el theta sea el valor de angle y cambia la posicion de acuerdo a eso
+        theta = angle %MAX_ANGLE;
+        if (theta < 0)
+        {
+            theta = MAX_ANGLE + theta;
+        }
+        position.x = radius * 1.5f * Mathf.Cos(theta);
+        position.y = radius * Mathf.Sin(theta);
     }
 }

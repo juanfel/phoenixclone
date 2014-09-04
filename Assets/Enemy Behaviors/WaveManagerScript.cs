@@ -6,6 +6,7 @@ public class WaveManagerScript : MonoBehaviour {
     //dandoles las instrucciones para moverse adelante o no
 	// Use this for initialization
     bool attackOrder = true;
+    public RadialMovementScript playerRadialMovement;
 	void Start () {
 	
 	}
@@ -16,6 +17,7 @@ public class WaveManagerScript : MonoBehaviour {
         {
             foreach (Transform enemy in transform)
             {
+                enemy.gameObject.GetComponent<ZigZaggingAiBehavior>().playerRadialMovement = playerRadialMovement;
                 StartCoroutine(StartMovement(enemy.gameObject));
 
             }
