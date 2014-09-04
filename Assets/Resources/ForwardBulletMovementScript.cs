@@ -16,6 +16,10 @@ public class ForwardBulletMovementScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         bullet.moveForward(direction);
+        if (gameObject.GetComponent<RadialMovementScript>().max_distance == gameObject.transform.position.z)
+        {
+            KillMe();
+        }
 	}
     void OnCollisionEnter(Collision coll)
     {
@@ -24,8 +28,12 @@ public class ForwardBulletMovementScript : MonoBehaviour {
             Debug.Log("HIT! Owner:" + owner.tag);
             Debug.Log("coll:" + coll.gameObject.tag);
             coll.gameObject.GetComponent<KillableBehavior>().RemoveHitpoint(damage,owner.gameObject);
-            
+            Invoke("KillMe", 0.5f) ;
         }
         
+    }
+    void KillMe()
+    {
+        Destroy(gameObject);
     }
 }

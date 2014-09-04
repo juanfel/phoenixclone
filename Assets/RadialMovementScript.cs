@@ -7,7 +7,7 @@ public class RadialMovementScript : MonoBehaviour {
     //tipos de naves
     public float max_distance;
     public float theta;
-    public float radius = 4;
+    public float radius = 6;
     public float speed; //en porciones de circulo por segundo
     float realSpeed; //en angulos por update
     public float linealSpeed; //En unidades por segundo
