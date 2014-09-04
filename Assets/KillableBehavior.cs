@@ -19,7 +19,7 @@ public class KillableBehavior : MonoBehaviour {
     {
         gameObject.collider.enabled = true;
     }
-    public void RemoveHitpoint(int damage, GameObject attacker)
+    public virtual void RemoveHitpoint(int damage, GameObject attacker)
     {
         hitpoints -= damage;
         //Queremos que lo que sea que haga daño lo haga una sola vez
@@ -35,7 +35,7 @@ public class KillableBehavior : MonoBehaviour {
             KillMe(attacker);
         }
     }
-    void KillMe(GameObject attacker)
+    protected void KillMe(GameObject attacker)
     {
         //Mata a este gameObject y si es pertinente 
         //da el puntaje necesario al atacante
