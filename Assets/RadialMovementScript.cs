@@ -34,7 +34,8 @@ public class RadialMovementScript : MonoBehaviour {
         }
         //Ajusta la entidad al cilindro
         position = new Vector3(radius *1.5f* Mathf.Cos(theta), radius * Mathf.Sin(theta), 
-            Mathf.Min(transform.position.z,max_distance));
+           transform.position.z);
+        Mathf.Clamp(transform.position.z, 0, max_distance);
         //Convierte las unidades entendibles por los humanos
         //a las apropiadas para el computador
         realSpeed = Time.fixedDeltaTime * (speed*MAX_ANGLE);

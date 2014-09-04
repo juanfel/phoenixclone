@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ZigZaggingAiBehavior : MonoBehaviour {
+public class ZigZaggingAiBehavior : EnemyAIBehavior {
     public RadialMovementScript radialMovement;
     public RadialMovementScript playerRadialMovement;
     bool startedGameplay = false;
-    bool startedMovement = true;
-    bool startedReturn = false;
+    public bool startedMovement = false;
+    public bool startedReturn = false;
     bool movingLeft = false;
     public float centerTheta; //Tiene el angulo en el cual el enemigo deberia oscilar
     float originalTheta; //Tiene el angulo de regreso
@@ -28,7 +28,12 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
             originalTheta = centerTheta;
             startedGameplay = true;
         }
-        if (startedMovement && startedGameplay)
+        if (transform.position.z <= 0)
+        {
+            //Comienza el patron para que la nave vuelva a su posicion inicial
+            startedReturn = true;
+        }
+        if (startedMovement && !startedReturn)
         {
             changeDirection();
             if (movingLeft)
@@ -51,21 +56,24 @@ public class ZigZaggingAiBehavior : MonoBehaviour {
             else
             {
                 startedReturn = false;
-                startedMovement = true;
             }
 
 
         }
-        if (transform.position.z <= 0)
-        {
-            //Comienza el patron para que la nave vuelva a su posicion inicial
-            startedMovement = false;
-            startedReturn = true;
-        }
+        
         
         
 	}
-
+    //Se encargan de que el enemigo empieze a moverse de acuerdo a este comportamiento
+    public override void StartMovement()
+    {
+        startedMovement = true;
+    }
+    public override void StopMovement()
+    {
+        startedMovement = false;
+        startedReturn = true;
+    }
     void changeDirection()
     {
         //Cambia la direccion del enemigo de acuerdo a la distancia angular
