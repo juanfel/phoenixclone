@@ -35,6 +35,7 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
         {
             //Comienza el patron para que la nave vuelva a su posicion inicial
             startedReturn = true;
+            startedMovement = false;
         }
         if (startedMovement && ! startedReturn)
         {
@@ -77,7 +78,10 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
     //Se encargan de que el enemigo empieze a moverse de acuerdo a este comportamiento
     public override void StartMovement()
     {
-        startedMovement = true;
+        if (!startedReturn)
+        {
+            startedMovement = true;
+        }
     }
     public override void StopMovement()
     {
