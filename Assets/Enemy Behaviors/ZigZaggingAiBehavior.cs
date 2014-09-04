@@ -37,7 +37,7 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
             startedReturn = true;
             startedMovement = false;
         }
-        if (startedMovement && ! startedReturn)
+        if (!startedReturn)
         {
             changeDirection();
             if (movingLeft)
@@ -48,7 +48,10 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
             {
                 radialMovement.moveRight();
             }
-            radialMovement.moveForward(-1f);
+            if (startedMovement)
+            {
+                radialMovement.moveForward(-1f);
+            }
         }
         else if (startedReturn)
         {
@@ -97,7 +100,10 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
         if (Mathf.Abs(delta) >=(movementAmplitude*(2*Mathf.PI)))
         {
             movingLeft = !movingLeft; //Deberia cambiar de true a false y viceversa
-            followPlayer(); //Queremos que siga al jugador solo despues de una oscilacion completa
+            if (target != null)
+            {
+                followPlayer(); //Queremos que siga al jugador solo despues de una oscilacion completa
+            }
         }
         
 

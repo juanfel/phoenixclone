@@ -18,6 +18,7 @@ public class WaveManagerScript : MonoBehaviour {
         foreach (Transform child in transform)
         {
             itemsForRandomEnable.Add(child.gameObject.GetComponent<EnemyAIBehavior>());
+            child.gameObject.GetComponent<EnemyAIBehavior>().waveManager = this;
         }
 	}
 	
