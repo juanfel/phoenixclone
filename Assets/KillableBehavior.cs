@@ -44,6 +44,10 @@ public class KillableBehavior : MonoBehaviour {
         {
             attacker.GetComponent<ScorableBehavior>().addScore(score);
         }
+        if (gameObject.tag == "Player")
+        {
+            Application.LoadLevel("mainmenu");
+        }
         Destroy(gameObject);
     }
 }
