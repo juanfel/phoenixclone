@@ -17,4 +17,9 @@ public class PersistenScoreScript : MonoBehaviour {
         //Obtiene el texto con el score del hijo que lo tiene
         return transform.Find("Score Text").GetComponent<GUIText>();
     }
+    GUIText getLivesText()
+    {
+        //Obtiene el texto con las vidas
+        return transform.Find("Lives Text").GetComponent<GUIText>();
+    }
 }
