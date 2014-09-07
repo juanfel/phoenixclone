@@ -2,16 +2,24 @@
 using System.Collections;
 
 public class PersistenScoreScript : MonoBehaviour {
-
+    static bool created = false;
 	// Use this for initialization
 	void Start () {
-        DontDestroyOnLoad(gameObject);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	void Awake()
+    {
+        //Hace que el gameobject sea singleton
+        if (!created)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            created = true;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        } 
+    }
     public GUIText getScoreText()
     {
         //Obtiene el texto con el score del hijo que lo tiene
