@@ -13,6 +13,7 @@ public class ScorableBehavior : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
+        scoreText = GameObject.FindGameObjectWithTag("GuiManager").GetComponent<PersistenScoreScript>().getScoreText();
         score = 0;
 	}
 	

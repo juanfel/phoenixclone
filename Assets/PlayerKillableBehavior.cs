@@ -7,6 +7,7 @@ public class PlayerKillableBehavior : KillableBehavior {
     public GUIText livesText;
     void Start()
     {
+        livesText = GameObject.FindGameObjectWithTag("GuiManager").GetComponent<PersistenScoreScript>().getLivesText();
         livesText.text = hitpoints.ToString();
     }
     public override void RemoveHitpoint(int damage, GameObject attacker)

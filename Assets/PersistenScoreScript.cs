@@ -12,12 +12,12 @@ public class PersistenScoreScript : MonoBehaviour {
 	void Update () {
 	
 	}
-    GUIText getScoreText()
+    public GUIText getScoreText()
     {
         //Obtiene el texto con el score del hijo que lo tiene
         return transform.Find("Score Text").GetComponent<GUIText>();
     }
-    GUIText getLivesText()
+    public GUIText getLivesText()
     {
         //Obtiene el texto con las vidas
         return transform.Find("Lives Text").GetComponent<GUIText>();
