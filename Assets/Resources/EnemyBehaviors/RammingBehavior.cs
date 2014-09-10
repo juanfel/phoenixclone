@@ -25,6 +25,7 @@ public class RammingBehavior : MonoBehaviour {
             coll.gameObject.GetComponent<KillableBehavior>().RemoveHitpoint(damage,gameObject);
             
         }
+        
 
     }
 }
