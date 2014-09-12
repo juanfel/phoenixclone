@@ -13,15 +13,19 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
     float originalTheta; //Tiene el angulo de regreso
     public float movementAmplitude = 0.15f; //Amplitud del movimiento zigzageante en porciones de circulo
 	// Use this for initialization
-	void Start () {
+    protected virtual void Init()
+    {
         centerTheta = radialMovement.theta;
         originalTheta = centerTheta;
         target = null;
+    }
+	void Start () {
+        Init();
             
 	}
 	
-	// Update is called once per frame
-	void Update () {
+    protected virtual void UpdateStatus()
+    {
         //Se mueve en un patron zigzageante cuando se le ordena hacerlo
         //Incluye el patron de retorno
         if (!startedGameplay)
@@ -58,8 +62,8 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
             //Aqui retrocede hasta llegar al inicio
             if (transform.position.z >= 0 && transform.position.z < radialMovement.max_distance)
             {
-            //    followPlayer();
-            //    radialMovement.setAngle(centerTheta);
+                //    followPlayer();
+                //    radialMovement.setAngle(centerTheta);
                 radialMovement.moveForward();
             }
             else
@@ -69,9 +73,10 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
 
 
         }
-        
-        
-        
+    }
+	// Update is called once per frame
+	void Update () {
+        UpdateStatus();
 	}
     public override void SetTarget(GameObject target)
     {
