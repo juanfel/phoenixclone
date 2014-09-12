@@ -19,6 +19,11 @@ public class KillableBehavior : MonoBehaviour {
     {
         gameObject.collider.enabled = true;
     }
+    public virtual void RemoveHitpointByMessage(HitMessage hit)
+    {
+        //Para cuando se usan mensajes para marcar un hit
+        RemoveHitpoint(hit.damage, hit.attacker);
+    }
     public virtual void RemoveHitpoint(int damage, GameObject attacker)
     {
         hitpoints -= damage;
@@ -49,5 +54,17 @@ public class KillableBehavior : MonoBehaviour {
             Application.LoadLevel("mainmenu");
         }
         Destroy(gameObject);
+    }
+    public struct HitMessage
+    {
+        //Struct que se ocupa para mandar mensajes de daño al KillableBehavior
+        public int damage;
+        public GameObject attacker;
+        public HitMessage(int damage, GameObject attacker)
+        {
+            this.damage = damage;
+            this.attacker = attacker;
+
+        }
     }
 }

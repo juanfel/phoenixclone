@@ -27,7 +27,8 @@ public class ForwardBulletMovementScript : MonoBehaviour {
         {
             Debug.Log("HIT! Owner:" + owner.tag);
             Debug.Log("coll:" + coll.gameObject.tag);
-            coll.gameObject.GetComponent<KillableBehavior>().RemoveHitpoint(damage,owner.gameObject);
+            KillableBehavior.HitMessage hit = new KillableBehavior.HitMessage(damage, owner.gameObject);
+            coll.gameObject.SendMessage("RemoveHitpointByMessage", hit,SendMessageOptions.DontRequireReceiver);
             Invoke("KillMe", 0.5f) ;
         }
         
