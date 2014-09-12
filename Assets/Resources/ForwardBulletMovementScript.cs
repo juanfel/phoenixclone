@@ -13,11 +13,15 @@ public class ForwardBulletMovementScript : MonoBehaviour {
         bullet.position.z = owner.transform.position.z;
 	}
 	
+    protected virtual bool CheckBoundaries()
+    {
+        //Ve si la bala esta dentro del campo de juego
+        return gameObject.GetComponent<RadialMovementScript>().max_distance == gameObject.transform.position.z;
+    }
 	// Update is called once per frame
 	void Update () {
         bullet.moveForward(direction);
-        if (gameObject.GetComponent<RadialMovementScript>().max_distance == gameObject.transform.position.z
-            || gameObject.transform.position.z < 0)
+        if (CheckBoundaries())
         {
             KillMe();
         }
@@ -30,7 +34,7 @@ public class ForwardBulletMovementScript : MonoBehaviour {
             Debug.Log("coll:" + coll.gameObject.tag);
             KillableBehavior.HitMessage hit = new KillableBehavior.HitMessage(damage, owner.gameObject);
             coll.gameObject.SendMessage("RemoveHitpointByMessage", hit,SendMessageOptions.DontRequireReceiver);
-            Invoke("KillMe", 0.5f) ;
+            Invoke("KillMe", 0.1f) ;
         }
         
     }

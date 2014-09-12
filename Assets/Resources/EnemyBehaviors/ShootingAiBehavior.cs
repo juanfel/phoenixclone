@@ -4,7 +4,7 @@ using System.Collections;
 public class ShootingAiBehavior : ZigZaggingAiBehavior {
     //Comportamiento para un enemigo que dispara. Por ahora hereda el movimiento zigzageante pero eso puede cambiar
 
-    string tipo_disparo = "Bala";
+    string tipo_disparo = "Bullets/EnemyBullet";
     GameObject disparo;
     bool shotReady = false;
     float rateOfFire = 1f;

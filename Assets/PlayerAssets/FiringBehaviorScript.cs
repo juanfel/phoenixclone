@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FiringBehaviorScript : MonoBehaviour {
     GameObject disparo;
-    string tipo_disparo = "Bala";
+    string tipo_disparo = "Bullets/Bala";
     bool shotReady = true;
     public float rateOfFire; //En segundos
 	// Use this for initialization
