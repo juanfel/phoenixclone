@@ -4,7 +4,7 @@ using System.Collections;
 public class ForwardBulletMovementScript : MonoBehaviour {
     //Controla el movimiento de una bala y su comportamiento cuando
     //choca
-    int direction = 1; //Indica el eje de movimiento (hacia adelante-hacia atras)
+    public int direction = 1; //Indica el eje de movimiento (hacia adelante-hacia atras)
     public int damage = 1;
     public GameObject owner;
     public RadialMovementScript bullet;
@@ -16,7 +16,8 @@ public class ForwardBulletMovementScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         bullet.moveForward(direction);
-        if (gameObject.GetComponent<RadialMovementScript>().max_distance == gameObject.transform.position.z)
+        if (gameObject.GetComponent<RadialMovementScript>().max_distance == gameObject.transform.position.z
+            || gameObject.transform.position.z < 0)
         {
             KillMe();
         }
