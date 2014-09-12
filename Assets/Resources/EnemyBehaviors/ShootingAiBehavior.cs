@@ -7,7 +7,7 @@ public class ShootingAiBehavior : ZigZaggingAiBehavior {
     string tipo_disparo = "Bullets/EnemyBullet";
     GameObject disparo;
     bool shotReady = false;
-    float rateOfFire = 1f;
+    float rateOfFire = 2f;
     
     protected override void UpdateStatus()
     {
@@ -29,7 +29,7 @@ public class ShootingAiBehavior : ZigZaggingAiBehavior {
     {
         //Hace que cuando de la orden de ataque tenga una chance de disparo
         base.StartMovement();
-        int chance = Random.Range(0, 5);
+        int chance = Random.Range(0, 6);
         Debug.Log("Chance: " + chance);
         if(chance > 3)
         {
