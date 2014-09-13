@@ -23,8 +23,5 @@ public class DiagonalBulletMovementScript : ForwardBulletMovementScript {
             bullet.moveRight();
         }
     } 
-	// Update is called once per frame
-	void Update () {
 	
-	}
 }
