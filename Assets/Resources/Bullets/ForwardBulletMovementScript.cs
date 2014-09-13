@@ -20,7 +20,7 @@ public class ForwardBulletMovementScript : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-        bullet.moveForward(direction);
+        MovementUpdate();
         if (CheckBoundaries())
         {
             KillMe();
@@ -33,6 +33,11 @@ public class ForwardBulletMovementScript : MonoBehaviour {
             Hit(coll);
         }
         
+    }
+    protected virtual void MovementUpdate()
+    {
+        //Contiene el comportamiento del movimiento
+        bullet.moveForward(direction);
     }
     protected virtual void Hit(Collision coll)
     {
