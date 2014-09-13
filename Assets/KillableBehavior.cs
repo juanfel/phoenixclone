@@ -51,7 +51,7 @@ public class KillableBehavior : MonoBehaviour {
         }
         if (gameObject.tag == "Player")
         {
-            Application.LoadLevel("mainmenu");
+            Application.LoadLevel("gameover");
         }
         Destroy(gameObject);
     }
