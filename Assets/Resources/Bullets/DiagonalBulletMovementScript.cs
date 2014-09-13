@@ -4,9 +4,7 @@ using System.Collections;
 public class DiagonalBulletMovementScript : ForwardBulletMovementScript {
     public bool moveLeft = false;
 	// Use this for initialization
-	void Start () {
 	
-	}
     protected override bool CheckBoundaries()
     {
         return base.CheckBoundaries() || transform.position.z == 0;

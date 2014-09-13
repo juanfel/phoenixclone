@@ -20,7 +20,7 @@ public class ShootingAiBehavior : ZigZaggingAiBehavior {
         base.StartMovement();
         int chance = Random.Range(0, 6);
         Debug.Log("Chance: " + chance);
-        if(chance > 3)
+        if(chance > 2)
         {
             shootBehavior.Shot();
         }
