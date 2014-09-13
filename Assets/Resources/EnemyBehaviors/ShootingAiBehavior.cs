@@ -4,26 +4,15 @@ using System.Collections;
 public class ShootingAiBehavior : ZigZaggingAiBehavior {
     //Comportamiento para un enemigo que dispara. Por ahora hereda el movimiento zigzageante pero eso puede cambiar
 
-    string tipo_disparo = "Bullets/EnemyBullet";
-    GameObject disparo;
-    bool shotReady = false;
-    float rateOfFire = 2f;
+    public BaseShotBehavior shootBehavior;
     
     protected override void UpdateStatus()
     {
  	     base.UpdateStatus();
-         if (shotReady)
-         {
-             disparo.GetComponent<ForwardBulletMovementScript>().owner = gameObject;
-             disparo.GetComponent<ForwardBulletMovementScript>().direction = -1;
-             Instantiate(disparo, gameObject.transform.position, Quaternion.identity);
-             Invoke("ReadyShot", rateOfFire);
-             shotReady = false;
-         }
     }   
 	void Start () {
         base.Init();
-        disparo = (GameObject)Resources.Load(tipo_disparo);
+       
 	}
     public override void StartMovement()
     {
@@ -33,7 +22,7 @@ public class ShootingAiBehavior : ZigZaggingAiBehavior {
         Debug.Log("Chance: " + chance);
         if(chance > 3)
         {
-            ReadyShot();
+            shootBehavior.Shot();
         }
     }
 	
@@ -41,8 +30,5 @@ public class ShootingAiBehavior : ZigZaggingAiBehavior {
 	void Update () {
         UpdateStatus();
 	}
-    void ReadyShot()
-    {
-        shotReady = true;
-    }
+   
 }

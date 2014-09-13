@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class DiagonalBulletMovementScript : ForwardBulletMovementScript {
-    public bool moveLeft;
+    public bool moveLeft = false;
 	// Use this for initialization
 	void Start () {
 	

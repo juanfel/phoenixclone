@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FiringBehaviorScript : MonoBehaviour {
+public class PlayerFiringBehaviorScript : MonoBehaviour {
     GameObject disparo;
     string tipo_disparo = "Bullets/Bala";
     bool shotReady = true;
