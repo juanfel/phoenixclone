@@ -30,4 +30,12 @@ public class PersistenScoreScript : MonoBehaviour {
         //Obtiene el texto con las vidas
         return transform.Find("Lives Text").GetComponent<GUIText>();
     }
+    public GUIText getHighscoreText()
+    {
+        return transform.Find("Highscore Text").GetComponent<GUIText>();
+    }
+    public GUIText getHighscorePlayer()
+    {
+        return transform.Find("Highscore player").GetComponent<GUIText>();
+    }
 }
