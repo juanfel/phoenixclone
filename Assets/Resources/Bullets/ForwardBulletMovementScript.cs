@@ -30,13 +30,18 @@ public class ForwardBulletMovementScript : MonoBehaviour {
     {
         if (coll.gameObject.tag != owner.tag)
         {
-            Debug.Log("HIT! Owner:" + owner.tag);
-            Debug.Log("coll:" + coll.gameObject.tag);
-            KillableBehavior.HitMessage hit = new KillableBehavior.HitMessage(damage, owner.gameObject);
-            coll.gameObject.SendMessage("RemoveHitpointByMessage", hit,SendMessageOptions.DontRequireReceiver);
-            Invoke("KillMe", 0.1f) ;
+            Hit(coll);
         }
         
+    }
+    protected virtual void Hit(Collision coll)
+    {
+        //Contiene el comportamiento cuando el proyectil golpea a alguien
+        Debug.Log("HIT! Owner:" + owner.tag);
+        Debug.Log("coll:" + coll.gameObject.tag);
+        KillableBehavior.HitMessage hit = new KillableBehavior.HitMessage(damage, owner.gameObject);
+        coll.gameObject.SendMessage("RemoveHitpointByMessage", hit, SendMessageOptions.DontRequireReceiver);
+        Invoke("KillMe", 0.1f);
     }
     void KillMe()
     {
