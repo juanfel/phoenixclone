@@ -4,30 +4,32 @@ using System.Collections;
 public class VShapedShotBehavior : BaseShotBehavior {
     //Tipo de disparo en forma de V
     string tipo_disparo = "Bullets/DiagonalEnemyBullet";
-    GameObject[] disparos;
+    GameObject shot;
+    GameObject[] currentShots;
     float rateOfFire = 2f;
 	// Use this for initialization
 	void Start () {
-        disparos = new GameObject[2];
-        for (int i = 0; i < 2; i++)
-        {
-            disparos[i] = (GameObject)Resources.Load(tipo_disparo);
-        }
+        currentShots = new GameObject[2];
+        shot = (GameObject)Resources.Load(tipo_disparo);
+        
 	}
 
     public override void Shot()
     {
-        foreach(GameObject disparo in disparos)
+        for (int i = 0; i < 2; i++ )
         {
-            DiagonalBulletMovementScript diagScript = disparo.GetComponent<DiagonalBulletMovementScript>();
-            diagScript.owner = gameObject;
-            diagScript.direction = -1;
+            currentShots[i] = (GameObject)Instantiate(shot, gameObject.transform.position, Quaternion.identity);
         }
-        disparos[0].GetComponent<DiagonalBulletMovementScript>().moveLeft = true;
-        foreach(GameObject disparo in disparos)
+        foreach (GameObject disparo in currentShots)
         {
-            Instantiate(disparo, gameObject.transform.position, Quaternion.identity);
+
+                DiagonalBulletMovementScript diagScript = disparo.GetComponent<DiagonalBulletMovementScript>();
+                diagScript.owner = gameObject;
+                diagScript.direction = -1;
+                diagScript.setMoveLeft(true);
         }
+        currentShots[1].GetComponent<DiagonalBulletMovementScript>().setMoveLeft(false);
+        
         
         Invoke("ReadyShot", rateOfFire);
         shotReady = false;
