@@ -81,8 +81,12 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
     public override void SetTarget(GameObject target)
     {
         base.SetTarget(target);
-        playerRadialMovement = target.GetComponent<RadialMovementScript>();
+        if(target)
+        {
+            playerRadialMovement = target.GetComponent<RadialMovementScript>();
+        }
     }
+        
     //Se encargan de que el enemigo empieze a moverse de acuerdo a este comportamiento
     public override void StartMovement()
     {
