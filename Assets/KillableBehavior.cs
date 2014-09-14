@@ -6,6 +6,7 @@ public class KillableBehavior : MonoBehaviour {
     public int hitpoints;
     public int score;
     public bool ghostAfterHit;
+    bool gameOver = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -51,9 +52,11 @@ public class KillableBehavior : MonoBehaviour {
         }
         if (gameObject.tag == "Player")
         {
-            Application.LoadLevel("gameover");
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerGameOverScript>().StartGameOver();
         }
         Destroy(gameObject);
+   
+        
     }
     public struct HitMessage
     {
@@ -67,4 +70,5 @@ public class KillableBehavior : MonoBehaviour {
 
         }
     }
+    
 }

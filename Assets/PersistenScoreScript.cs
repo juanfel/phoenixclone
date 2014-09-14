@@ -38,4 +38,6 @@ public class PersistenScoreScript : MonoBehaviour {
     {
         return transform.Find("Highscore player").GetComponent<GUIText>();
     }
+
+
 }
