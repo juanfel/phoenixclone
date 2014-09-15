@@ -48,7 +48,7 @@ public class ForwardBulletMovementScript : MonoBehaviour {
         coll.gameObject.SendMessage("RemoveHitpointByMessage", hit, SendMessageOptions.DontRequireReceiver);
         Invoke("KillMe", 0.1f);
     }
-    void KillMe()
+    protected void KillMe()
     {
         Destroy(gameObject);
     }

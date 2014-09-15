@@ -1,20 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpeedPowerUpBehavior : EnemyBulletForwardBehavior {
+public class SpeedPowerUpBehavior : ForwardBulletMovementScript {
     //Crea un powerup que aumenta la velocidad de la nave
     public float speedAugment;
     public float powerUpTime;
     RadialMovementScript player;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    protected override bool CheckBoundaries()
+    {
+        return base.CheckBoundaries() || transform.position.z == 0;
+    }
     protected override void Hit(Collision coll)
     {
         if(coll.gameObject.tag == "Player")
@@ -22,6 +17,7 @@ public class SpeedPowerUpBehavior : EnemyBulletForwardBehavior {
             player = coll.gameObject.GetComponent<RadialMovementScript>();
             player.speed += speedAugment;
             Invoke("RevertChange", powerUpTime);
+            KillMe();
             
         }
     }
@@ -29,6 +25,7 @@ public class SpeedPowerUpBehavior : EnemyBulletForwardBehavior {
     {
         if(player)
         {
+            Debug.Log("Reverting");
             player.speed -= speedAugment;
         }
     }
