@@ -7,10 +7,12 @@ public class ForwardBulletMovementScript : MonoBehaviour {
     public int direction = 1; //Indica el eje de movimiento (hacia adelante-hacia atras)
     public int damage = 1;
     public GameObject owner;
+    public string owner_tag;
     public RadialMovementScript bullet;
 	// Use this for initialization
 	void Start () {
         bullet.position.z = owner.transform.position.z;
+        owner_tag = owner.gameObject.tag;
 	}
 	
     protected virtual bool CheckBoundaries()
@@ -28,7 +30,7 @@ public class ForwardBulletMovementScript : MonoBehaviour {
 	}
     void OnCollisionEnter(Collision coll)
     {
-        if (coll.gameObject.tag != owner.tag)
+        if (coll != null && coll.gameObject.tag != owner_tag)
         {
             Hit(coll);
         }
@@ -42,8 +44,6 @@ public class ForwardBulletMovementScript : MonoBehaviour {
     protected virtual void Hit(Collision coll)
     {
         //Contiene el comportamiento cuando el proyectil golpea a alguien
-        Debug.Log("HIT! Owner:" + owner.tag);
-        Debug.Log("coll:" + coll.gameObject.tag);
         KillableBehavior.HitMessage hit = new KillableBehavior.HitMessage(damage, owner.gameObject);
         coll.gameObject.SendMessage("RemoveHitpointByMessage", hit, SendMessageOptions.DontRequireReceiver);
         Invoke("KillMe", 0.1f);

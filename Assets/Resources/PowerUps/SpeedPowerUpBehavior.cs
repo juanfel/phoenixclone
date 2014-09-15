@@ -12,21 +12,13 @@ public class SpeedPowerUpBehavior : ForwardBulletMovementScript {
     }
     protected override void Hit(Collision coll)
     {
+        Debug.Log("Bonustag: " + coll.gameObject.tag);
         if(coll.gameObject.tag == "Player")
         {
-            player = coll.gameObject.GetComponent<RadialMovementScript>();
-            player.speed += speedAugment;
-            Invoke("RevertChange", powerUpTime);
+            Debug.Log("Sending Message");
+            coll.gameObject.SendMessage("SpeedBonusGranter",speedAugment);
             KillMe();
             
-        }
-    }
-    void RevertChange()
-    {
-        if(player)
-        {
-            Debug.Log("Reverting");
-            player.speed -= speedAugment;
         }
     }
 }
