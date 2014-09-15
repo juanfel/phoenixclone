@@ -6,7 +6,9 @@ public class KillableBehavior : MonoBehaviour {
     public int hitpoints;
     public int score;
     public bool ghostAfterHit;
-    bool gameOver = false;
+    public bool hasPowerUp = false;
+
+    public PowerUpDroppingBehavior powerUpDropper;
 	// Use this for initialization
 	void Start () {
 	
@@ -53,6 +55,10 @@ public class KillableBehavior : MonoBehaviour {
         if (gameObject.tag == "Player")
         {
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerGameOverScript>().StartGameOver();
+        }
+        if(hasPowerUp)
+        {
+            powerUpDropper.DropPowerUp();
         }
         Destroy(gameObject);
    
