@@ -25,6 +25,7 @@ public class VShapedShotBehavior : BaseShotBehavior {
 
                 DiagonalBulletMovementScript diagScript = disparo.GetComponent<DiagonalBulletMovementScript>();
                 diagScript.owner = gameObject;
+                diagScript.owner_tag = tag;
                 diagScript.direction = -1;
                 diagScript.setMoveLeft(true);
         }

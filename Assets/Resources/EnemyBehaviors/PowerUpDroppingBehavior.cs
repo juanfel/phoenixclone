@@ -13,6 +13,7 @@ public class PowerUpDroppingBehavior : MonoBehaviour {
             GameObject powerUp = (GameObject)Resources.Load(powerUpName);
             SpeedPowerUpBehavior powerUpProjectile =  powerUp.GetComponent<SpeedPowerUpBehavior>();
             powerUpProjectile.owner = gameObject;
+            powerUpProjectile.owner_tag = gameObject.tag;
             powerUpProjectile.direction = -1;
             Instantiate(powerUp, gameObject.transform.position, Quaternion.identity);
         }

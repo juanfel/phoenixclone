@@ -16,6 +16,7 @@ public class PlayerFiringBehaviorScript : MonoBehaviour {
         if (Input.GetButtonDown("Fire1") && shotReady)
         {
             disparo.GetComponent<ForwardBulletMovementScript>().owner = gameObject;
+            disparo.GetComponent<ForwardBulletMovementScript>().owner_tag = tag;
             Instantiate(disparo, gameObject.transform.position, Quaternion.identity);
             Invoke("ReadyShot", rateOfFire);
             shotReady = false;

@@ -12,7 +12,7 @@ public class ForwardBulletMovementScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         bullet.position.z = owner.transform.position.z;
-        owner_tag = owner.gameObject.tag;
+
 	}
 	
     protected virtual bool CheckBoundaries()
@@ -30,6 +30,8 @@ public class ForwardBulletMovementScript : MonoBehaviour {
 	}
     void OnCollisionEnter(Collision coll)
     {
+        Debug.Log("Owner: " + owner_tag);
+        Debug.Log("Receiver: " + coll.gameObject.tag);
         if (coll != null && coll.gameObject.tag != owner_tag)
         {
             Hit(coll);
