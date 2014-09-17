@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpeedPowerUpBehavior : ForwardBulletMovementScript {
+public class SpeedPowerUpBehavior : ForwardBulletMovementScript
+{
     //Crea un powerup que aumenta la velocidad de la nave
     public float speedAugment;
     public float powerUpTime;
@@ -13,12 +14,25 @@ public class SpeedPowerUpBehavior : ForwardBulletMovementScript {
     protected override void Hit(Collision coll)
     {
         Debug.Log("Bonustag: " + coll.gameObject.tag);
-        if(coll.gameObject.tag == "Player")
+        if (coll.gameObject.tag == "Player")
         {
             Debug.Log("Sending Message");
-            coll.gameObject.SendMessage("SpeedBonusGranter",speedAugment);
+            SpeedPowerUpMessage message = new SpeedPowerUpMessage(speedAugment, powerUpTime);
+            coll.gameObject.SendMessage("SpeedBonusGranter", message);
             KillMe();
-            
+
         }
+    }
+    public class SpeedPowerUpMessage
+    {
+        //Tipo de mensaje con el contenido del bonus
+        public float bonus;
+        public float time;
+        public SpeedPowerUpMessage(float bonus, float time)
+        {
+            this.bonus = bonus;
+            this.time = time;
+        }
+
     }
 }

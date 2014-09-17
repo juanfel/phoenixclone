@@ -3,17 +3,18 @@ using System.Collections;
 
 public class PlayerPowerUpGranterScript : MonoBehaviour {
     //Se encarga de dar o quitar al jugador los bonus apropiados
-	void SpeedBonusGranter(float bonus)
+	void SpeedBonusGranter(SpeedPowerUpBehavior.SpeedPowerUpMessage bonusMessage)
     {
         Debug.Log("Granting Bonus");
-        gameObject.GetComponent<RadialMovementScript>().speed += bonus;
-        StartCoroutine(SpeedBonusReverter(bonus));
+        gameObject.GetComponent<RadialMovementScript>().speed += bonusMessage.bonus;
+        StartCoroutine(SpeedBonusReverter(bonusMessage));
 
     }
-    IEnumerator SpeedBonusReverter(float bonus)
+    IEnumerator SpeedBonusReverter(SpeedPowerUpBehavior.SpeedPowerUpMessage bonusMessage)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(bonusMessage.time);
         Debug.Log("Revering Bonus");
-        gameObject.GetComponent<RadialMovementScript>().speed -= bonus;
+        gameObject.GetComponent<RadialMovementScript>().speed -= bonusMessage.bonus;
     }
+    
 }
