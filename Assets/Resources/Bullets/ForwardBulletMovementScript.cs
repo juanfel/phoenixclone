@@ -21,7 +21,7 @@ public class ForwardBulletMovementScript : MonoBehaviour {
         return gameObject.GetComponent<RadialMovementScript>().max_distance == gameObject.transform.position.z;
     }
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         MovementUpdate();
         if (CheckBoundaries())
         {
