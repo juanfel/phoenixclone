@@ -14,11 +14,9 @@ public class HighScoreManagerScript : MonoBehaviour {
         scoretext = GuiManager.GetComponent<PersistenScoreScript>().getScoreText();
         highscoretext = GuiManager.GetComponent<PersistenScoreScript>().getHighscoreText();
         highscoreplayer = GuiManager.GetComponent<PersistenScoreScript>().getHighscorePlayer();
-        if(int.Parse(scoretext.text) >= int.Parse(highscoretext.text))
+        if (int.Parse(scoretext.text) >= int.Parse(highscoretext.text))
         {
             isHighscore = true;
-            highscoretext.text = scoretext.text;
-            scoretext.text = "0";
         }
         else
         {
@@ -49,6 +47,7 @@ public class HighScoreManagerScript : MonoBehaviour {
         }
         if(GUI.Button(noRect, "No"))
         {
+            scoretext.text = "0";
             Application.LoadLevel("mainmenu");
         }
     }
@@ -59,6 +58,8 @@ public class HighScoreManagerScript : MonoBehaviour {
         if(GUI.Button(noRect, "Confirmar"))
         {
             highscoreplayer.text = playername;
+            highscoretext.text = scoretext.text;
+            scoretext.text = "0";
              Application.LoadLevel("mainmenu");
         }
     }
