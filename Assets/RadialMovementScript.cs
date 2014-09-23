@@ -36,6 +36,7 @@ public class RadialMovementScript : MonoBehaviour {
         position = new Vector3(radius *1.5f* Mathf.Cos(theta), radius * Mathf.Sin(theta), 
            transform.position.z);
         Mathf.Clamp(transform.position.z, 0, max_distance);
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, new Vector3(0, 0, 0));
         //Convierte las unidades entendibles por los humanos
         //a las apropiadas para el computador
         realSpeed = Time.fixedDeltaTime * (speed*MAX_ANGLE);
@@ -46,7 +47,9 @@ public class RadialMovementScript : MonoBehaviour {
     void Update()
     {
         transform.position = position;
-        transform.eulerAngles = new Vector3(0,0,theta*Mathf.Rad2Deg);
+        //Queremos que los sprites apunten al centro
+        transform.eulerAngles = new Vector3(0,0,getTrueAngle(theta+0.5f*Mathf.PI)*Mathf.Rad2Deg);
+       
     }
    
     void FixedUpdate()
