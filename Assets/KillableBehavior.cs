@@ -45,10 +45,11 @@ public class KillableBehavior : MonoBehaviour {
     }
     protected void KillMe(GameObject attacker)
     {
-        //Mata a este gameObject y si es pertinente 
-        //da el puntaje necesario al atacante
-        Debug.Log("attacker: " + attacker.tag);
-        if (attacker.tag == "Player")
+        //Se encarga de eliminar limpiamente a la entidad que puede ser matada
+        //Incluye mandar a aumentar puntos, mandar a gameover, quitarse a si mismo de la lista del wave y
+        //soltar powerups
+       
+        if(attacker != null && attacker.tag == "Player")
         {
             attacker.GetComponent<ScorableBehavior>().addScore(score);
         }
