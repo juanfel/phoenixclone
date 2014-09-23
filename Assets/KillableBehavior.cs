@@ -60,6 +60,11 @@ public class KillableBehavior : MonoBehaviour {
         {
             powerUpDropper.DropPowerUp();
         }
+        if(transform.parent != null && transform.parent.tag == "WaveManager")
+        {
+            EnemyAIBehavior currentAIBehavior = GetComponent<EnemyAIBehavior>();
+            GetComponentInParent<WaveManagerScript>().GetEnemyList().Remove(currentAIBehavior);
+        }
         Destroy(gameObject);
    
         

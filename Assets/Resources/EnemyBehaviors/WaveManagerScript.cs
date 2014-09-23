@@ -70,6 +70,10 @@ public class WaveManagerScript : MonoBehaviour {
         yield return new WaitForSeconds(Random.Range(0, 4));
         enemy.gameObject.GetComponent<EnemyAIBehavior>().StartMovement();
     }
+    public IList<EnemyAIBehavior> GetEnemyList()
+    {
+        return itemsForRandomEnable;
+    }
     //Funciones de utilidad para seleccion aleatoria de naves
     public static void Shuffle<T>(List<T> list)
     {
