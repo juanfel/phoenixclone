@@ -16,18 +16,32 @@ public class PauseMenuScript : MonoBehaviour {
         }
 	}
     Rect bigRect = new Rect(
-            ((int)Screen.width * 0.3f), ((int)Screen.height * 0.2f),
-            ((int)Screen.width * 0.4f), ((int)Screen.height * 0.4f));
+            ((int)Screen.width * 0.4f), ((int)Screen.height * 0.2f),
+            ((int)Screen.width * 0.3f), ((int)Screen.height * 0.3f));
+    Rect returnRect = new Rect(
+            ((int)Screen.width * 0.05f), ((int)Screen.height * 0.1f),
+            ((int)Screen.width * 0.2f), ((int)Screen.height * 0.1f));
+    Rect mainmenuRect = new Rect(
+            ((int)Screen.width * 0.05f), ((int)Screen.height * 0.2f),
+            ((int)Screen.width * 0.2f), ((int)Screen.height * 0.1f));
     void OnGUI()
     {
         if(paused)
         {
-            GUI.Window(0, bigRect, showExitButtons, "Pausado");
+            GUI.Window(0, bigRect, showExitButtons, "Pausaded");
         }
     }
     void showExitButtons(int windowID)
     {
-
+        if(GUI.Button(returnRect,"Return(esc)"))
+        {
+            PauseUnpause();
+        }
+        if(GUI.Button(mainmenuRect,"Exit"))
+        {
+            PauseUnpause();
+            Application.LoadLevel("mainmenu");
+        }
     }
     void PauseUnpause()
     {
