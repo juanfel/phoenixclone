@@ -24,7 +24,7 @@ public class WaveManagerScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         //Se quiere que el manager de una orden de ataque aleatoria a un conjunto arbitrario
         //de naves en un tiempo arbitrario
         if(!invokedAttack)

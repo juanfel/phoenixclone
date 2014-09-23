@@ -46,9 +46,12 @@ public class RadialMovementScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        transform.position = position;
-        //Queremos que los sprites apunten al centro
-        transform.eulerAngles = new Vector3(0,0,getTrueAngle(theta+0.5f*Mathf.PI)*Mathf.Rad2Deg);
+        if(!PauseMenuScript.paused)
+        {
+            transform.position = position;
+            //Queremos que los sprites apunten al centro
+            transform.eulerAngles = new Vector3(0, 0, getTrueAngle(theta + 0.5f * Mathf.PI) * Mathf.Rad2Deg);
+        }
        
     }
    

@@ -3,10 +3,9 @@ using System.Collections;
 
 public class PauseMenuScript : MonoBehaviour {
 
-    bool paused;
+    public static bool paused = false;
 	// Use this for initialization
 	void Start () {
-        paused = false;
 	}
 	
 	// Update is called once per frame

@@ -75,7 +75,7 @@ public class ZigZaggingAiBehavior : EnemyAIBehavior {
         }
     }
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         UpdateStatus();
 	}
     public override void SetTarget(GameObject target)
