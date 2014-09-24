@@ -32,11 +32,16 @@ public class ForwardBulletMovementScript : MonoBehaviour {
     {
         Debug.Log("Owner: " + owner_tag);
         Debug.Log("Receiver: " + coll.gameObject.tag);
-        if (coll != null && coll.gameObject.tag != owner_tag)
+        if (HitConditions(coll))
         {
             Hit(coll);
         }
         
+    }
+    protected virtual bool HitConditions(Collision coll)
+    {
+        //Contiene lo que se considera como colision
+        return coll != null && coll.gameObject.tag != owner_tag;
     }
     protected virtual void MovementUpdate()
     {

@@ -21,8 +21,8 @@ public class BouncingShotBehavior : BaseShotBehavior {
         currentShot.owner = gameObject;
         currentShot.owner_tag = gameObject.tag;
         currentShot.direction = -1;
-        int chance = Random.Range(0,1);
-        if (chance > 0)
+        int chance = Random.Range(0,10);
+        if (chance > 5)
             currentShot.setMoveLeft(true);
         else
             currentShot.setMoveLeft(false);

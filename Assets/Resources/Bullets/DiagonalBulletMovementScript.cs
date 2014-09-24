@@ -18,7 +18,6 @@ public class DiagonalBulletMovementScript : ForwardBulletMovementScript {
         }
         else
         {
-            Debug.Log("Moving Right");
             bullet.moveRight();
         }
     }
