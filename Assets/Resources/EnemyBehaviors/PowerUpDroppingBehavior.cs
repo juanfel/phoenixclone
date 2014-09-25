@@ -9,7 +9,7 @@ public class PowerUpDroppingBehavior : MonoBehaviour {
         int chance = Random.Range(0, 6);
         if(chance >= 1)
         {
-            Debug.Log("Dropping powerup");
+            //Debug.Log("Dropping powerup");
             GameObject powerUp = (GameObject)Resources.Load(powerUpName);
             SpeedPowerUpBehavior powerUpProjectile =  powerUp.GetComponent<SpeedPowerUpBehavior>();
             powerUpProjectile.owner = gameObject;

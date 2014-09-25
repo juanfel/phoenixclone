@@ -19,7 +19,7 @@ public class ShootingAiBehavior : ZigZaggingAiBehavior {
         //Hace que cuando de la orden de ataque tenga una chance de disparo
         base.StartMovement();
         int chance = Random.Range(0, 6);
-        Debug.Log("Chance: " + chance);
+        //Debug.Log("Chance: " + chance);
         if(chance > 2)
         {
             shootBehavior.Shot();

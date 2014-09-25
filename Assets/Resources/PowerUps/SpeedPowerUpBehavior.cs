@@ -13,10 +13,10 @@ public class SpeedPowerUpBehavior : ForwardBulletMovementScript
     }
     protected override void Hit(Collision coll)
     {
-        Debug.Log("Bonustag: " + coll.gameObject.tag);
+        //Debug.Log("Bonustag: " + coll.gameObject.tag);
         if (coll.gameObject.tag == "Player")
         {
-            Debug.Log("Sending Message");
+            //Debug.Log("Sending Message");
             SpeedPowerUpMessage message = new SpeedPowerUpMessage(speedAugment, powerUpTime);
             coll.gameObject.SendMessage("SpeedBonusGranter", message);
             KillMe();

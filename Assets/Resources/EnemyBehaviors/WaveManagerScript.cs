@@ -60,7 +60,7 @@ public class WaveManagerScript : MonoBehaviour {
     }
     void GiveAttackOrder()
     {
-        Debug.Log("ATTACK!");
+        //Debug.Log("ATTACK!");
         attackOrder = true;
         invokedAttack = false;
     }

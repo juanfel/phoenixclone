@@ -8,7 +8,7 @@ public class BouncingBulletMovementScript : DiagonalBulletMovementScript {
         //Esta bala debe chocar con cualquier enemigo y cambiar su direccion si eso ocurre
         if(coll.gameObject.tag != "Player")
         {
-            Debug.Log("Change of direction");
+            //Debug.Log("Change of direction");
             moveLeft = !moveLeft;
         }
         else

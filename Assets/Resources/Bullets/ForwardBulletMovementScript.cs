@@ -30,8 +30,8 @@ public class ForwardBulletMovementScript : MonoBehaviour {
 	}
     void OnCollisionEnter(Collision coll)
     {
-        Debug.Log("Owner: " + owner_tag);
-        Debug.Log("Receiver: " + coll.gameObject.tag);
+        //Debug.Log("Owner: " + owner_tag);
+        //Debug.Log("Receiver: " + coll.gameObject.tag);
         if (HitConditions(coll))
         {
             Hit(coll);

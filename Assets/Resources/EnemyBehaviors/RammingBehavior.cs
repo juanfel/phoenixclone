@@ -21,7 +21,7 @@ public class RammingBehavior : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Player")
         {
-            Debug.Log("Embestida");
+            //Debug.Log("Embestida");
             KillableBehavior.HitMessage hit = new KillableBehavior.HitMessage(damage, gameObject);
             coll.gameObject.SendMessage("RemoveHitpointByMessage", hit,SendMessageOptions.DontRequireReceiver);
             
