@@ -9,9 +9,9 @@ public class RadialMovementScript : MonoBehaviour {
     public float theta;
     public float radius = 6;
     public float speed; //en porciones de circulo por segundo
-    float realSpeed; //en angulos por update
+    public float realSpeed; //en angulos por update
     public float linealSpeed; //En unidades por segundo
-    float realLinealSpeed; //En unidades por update
+    public float realLinealSpeed; //En unidades por update
     public const float MAX_ANGLE = 2f*Mathf.PI;
     public const float MAX_SPEED = 5f;
     Quaternion angleQuat;
@@ -101,6 +101,11 @@ public class RadialMovementScript : MonoBehaviour {
     {
         //Devuelve la velocidad lineal real
         return realLinealSpeed;
+    }
+    public void updateSpeed()
+    {
+        realSpeed = Time.fixedDeltaTime * (speed * MAX_ANGLE);
+        realLinealSpeed = Time.fixedDeltaTime * linealSpeed;
     }
     public static float getTrueAngle(float angle)
     {
