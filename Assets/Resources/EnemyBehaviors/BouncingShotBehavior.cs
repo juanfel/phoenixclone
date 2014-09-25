@@ -16,18 +16,22 @@ public class BouncingShotBehavior : BaseShotBehavior {
 
     public override void Shot()
     {
-        currentShot = disparo.GetComponent<BouncingBulletMovementScript>();
+        if(shotReady)
+        {
+            currentShot = disparo.GetComponent<BouncingBulletMovementScript>();
 
-        currentShot.owner = gameObject;
-        currentShot.owner_tag = gameObject.tag;
-        currentShot.direction = -1;
-        int chance = Random.Range(0,10);
-        if (chance > 5)
-            currentShot.setMoveLeft(true);
-        else
-            currentShot.setMoveLeft(false);
-        Instantiate(disparo, gameObject.transform.position, Quaternion.identity);
-        Invoke("ReadyShot", rateOfFire);
-        shotReady = false;
+            currentShot.owner = gameObject;
+            currentShot.owner_tag = gameObject.tag;
+            currentShot.direction = -1;
+            int chance = Random.Range(0, 10);
+            if (chance > 5)
+                currentShot.setMoveLeft(true);
+            else
+                currentShot.setMoveLeft(false);
+            Instantiate(disparo, gameObject.transform.position, Quaternion.identity);
+            Invoke("ReadyShot", rateOfFire);
+            shotReady = false;
+        }
+        
     }
 }

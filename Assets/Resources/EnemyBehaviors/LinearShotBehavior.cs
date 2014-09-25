@@ -14,12 +14,16 @@ public class LinearShotBehavior : BaseShotBehavior {
 
     public override void Shot()
     {
-        disparo.GetComponent<ForwardBulletMovementScript>().owner = gameObject;
-        disparo.GetComponent<ForwardBulletMovementScript>().owner_tag = gameObject.tag;
-        disparo.GetComponent<ForwardBulletMovementScript>().direction = -1;
-        Instantiate(disparo, gameObject.transform.position, Quaternion.identity);
-        Invoke("ReadyShot", rateOfFire);
-        shotReady = false;
+        if(shotReady)
+        {
+            disparo.GetComponent<ForwardBulletMovementScript>().owner = gameObject;
+            disparo.GetComponent<ForwardBulletMovementScript>().owner_tag = gameObject.tag;
+            disparo.GetComponent<ForwardBulletMovementScript>().direction = -1;
+            Instantiate(disparo, gameObject.transform.position, Quaternion.identity);
+            Invoke("ReadyShot", rateOfFire);
+            shotReady = false;
+        }
+        
     }
     
 }

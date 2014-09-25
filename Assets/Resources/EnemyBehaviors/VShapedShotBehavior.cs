@@ -16,23 +16,27 @@ public class VShapedShotBehavior : BaseShotBehavior {
 
     public override void Shot()
     {
-        for (int i = 0; i < 2; i++ )
+        if(shotReady)
         {
-            currentShots[i] = (GameObject)Instantiate(shot, gameObject.transform.position, Quaternion.identity);
-        }
-        foreach (GameObject disparo in currentShots)
-        {
+            for (int i = 0; i < 2; i++)
+            {
+                currentShots[i] = (GameObject)Instantiate(shot, gameObject.transform.position, Quaternion.identity);
+            }
+            foreach (GameObject disparo in currentShots)
+            {
 
                 DiagonalBulletMovementScript diagScript = disparo.GetComponent<DiagonalBulletMovementScript>();
                 diagScript.owner = gameObject;
                 diagScript.owner_tag = tag;
                 diagScript.direction = -1;
                 diagScript.setMoveLeft(true);
+            }
+            currentShots[1].GetComponent<DiagonalBulletMovementScript>().setMoveLeft(false);
+
+
+            Invoke("ReadyShot", rateOfFire);
+            shotReady = false;
         }
-        currentShots[1].GetComponent<DiagonalBulletMovementScript>().setMoveLeft(false);
         
-        
-        Invoke("ReadyShot", rateOfFire);
-        shotReady = false;
     }
 }
