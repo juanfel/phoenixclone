@@ -6,18 +6,18 @@ public class BouncingShotBehavior : BaseShotBehavior {
     string tipo_disparo = "Bullets/BouncingEnemyBullet";
     GameObject disparo;
     BouncingBulletMovementScript currentShot;
-    float rateOfFire = 2f;
+    
     // Use this for initialization
     void Start()
     {
+        shotReady = true;
         disparo = (GameObject)Resources.Load(tipo_disparo);
+        rateOfFire = 2f;
     }
 
 
     public override void Shot()
     {
-        if(shotReady)
-        {
             currentShot = disparo.GetComponent<BouncingBulletMovementScript>();
 
             currentShot.owner = gameObject;
@@ -31,7 +31,6 @@ public class BouncingShotBehavior : BaseShotBehavior {
             Instantiate(disparo, gameObject.transform.position, Quaternion.identity);
             Invoke("ReadyShot", rateOfFire);
             shotReady = false;
-        }
         
     }
 }

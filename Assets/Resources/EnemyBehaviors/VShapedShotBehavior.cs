@@ -6,18 +6,17 @@ public class VShapedShotBehavior : BaseShotBehavior {
     string tipo_disparo = "Bullets/DiagonalEnemyBullet";
     GameObject shot;
     GameObject[] currentShots;
-    float rateOfFire = 2f;
+    
 	// Use this for initialization
 	void Start () {
+        shotReady = true;
         currentShots = new GameObject[2];
         shot = (GameObject)Resources.Load(tipo_disparo);
-        
+        rateOfFire = 2f;
 	}
 
     public override void Shot()
     {
-        if(shotReady)
-        {
             for (int i = 0; i < 2; i++)
             {
                 currentShots[i] = (GameObject)Instantiate(shot, gameObject.transform.position, Quaternion.identity);
@@ -36,7 +35,6 @@ public class VShapedShotBehavior : BaseShotBehavior {
 
             Invoke("ReadyShot", rateOfFire);
             shotReady = false;
-        }
         
     }
 }
