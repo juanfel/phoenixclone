@@ -12,7 +12,8 @@ public class ForwardBulletMovementScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         bullet.position.z = owner.transform.position.z;
-
+        bullet.theta = owner.GetComponent<RadialMovementScript>().theta;
+        bullet.updatePosition();
 	}
 	
     protected virtual bool CheckBoundaries()

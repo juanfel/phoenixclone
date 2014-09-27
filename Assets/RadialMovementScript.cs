@@ -78,8 +78,7 @@ public class RadialMovementScript : MonoBehaviour {
         {
             theta = MAX_ANGLE + theta;
         }
-        position.x = radius* 1.5f * Mathf.Cos(theta);
-        position.y = radius * Mathf.Sin(theta);
+        updatePosition();
     }
     public void moveForward(float axis)
     {
@@ -91,6 +90,12 @@ public class RadialMovementScript : MonoBehaviour {
     {
         //Alias para que actor avanze hacia la camara
         moveForward(1f);
+    }
+    public void updatePosition()
+    {
+        //Hace que la posicion nueva en el plano cartesiano corresponda al angulo theta
+        position.x = radius * 1.5f * Mathf.Cos(theta);
+        position.y = radius * Mathf.Sin(theta);
     }
     public float getAngularSpeed()
     {
